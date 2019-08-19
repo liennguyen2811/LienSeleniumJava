@@ -37,5 +37,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="F:/Lien Disk D/Selenium/Framework1/selenium-java-3.141.59/javax.mail-1.6.2.jar"/>
+	<classpathentry kind="lib" path="F:/Eclipse/selenium-java-3.141.59/libs/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="F:/Eclipse/selenium-java-3.141.59/libs/com.lowagie.text-2.1.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,6 +1,23 @@
 package RailwayTestCaseRefactory;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import java.net.URL;
 
 import org.openqa.selenium.WebDriver;
@@ -8,14 +25,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import Constant.Constant;
+import Common.GmailHelper;
+import PDFEmail.BaseClass;
 import RailwayFactory.HomePageRefactory;
 import RailwayFactory.LoginPageRefactory;
+import reporter.JyperionListener;
 
-public class LoginTestRefactory {
+@Listeners(JyperionListener.class)
+public class LoginTestRefactory extends BaseClass {
 	
 	WebDriver driver;
 
@@ -130,6 +153,7 @@ public class LoginTestRefactory {
 			loginPage.getNonPassWordInput();
 		}
 
+		
 		String actualErrorMsg = loginPage.getNonPassWordInput();
 		String expectedErrorMsg = "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
 
@@ -138,4 +162,10 @@ public class LoginTestRefactory {
 		Assert.assertEquals(actualErrorMsg, expectedErrorMsg, "Test case is failed");
 	}
 
+	@AfterSuite
+	public void tearDown(){
+		GmailHelper.sendPDFReportByGMail("thanhletraining01@gmail.com", "logigear123", "liennguyen2811@gmail.com", "PDF Report", "");
+	}
+	
+	
 }
